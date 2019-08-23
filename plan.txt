@@ -1,0 +1,20 @@
+Client
+------
+discover service and hosts
+Get user to choose host
+Get user to choose file
+Send header to server
+Wait for response
+If yes, then send rest of data
+If no, then cancel.
+
+
+Server
+------
+Wait for client to connect
+When connection made, wait for 2 new lines, this is header
+Display header to user with file name and size
+Let user accept or deny
+Send response to client
+Receive rest of data.
+

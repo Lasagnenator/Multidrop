@@ -1,0 +1,13 @@
+connection type is regular bluetooth socket
+Service-id = 2ee6ffc8-c746-4363-a8e1-31005b2b9263
+port = any
+name = any
+
+--------AFTER BLUETOOTH CONNECTION MADE----------
+
+FILE_SEND PROTOCOL
+------------------
+<file name>\n
+<length in bytes of content>\n
+<content>
+
