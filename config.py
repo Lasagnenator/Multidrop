@@ -1,12 +1,10 @@
-try:
-    f = open("config.txt", "r")
-except:
-    f = open("../config.txt", "r")
-strings = [line for line in f]
-f.close()
+import configparser
+config = configparser.ConfigParser()
 
-for line in strings:
-    if line.startswith("name="):
-        name = line[5:]
-    elif line.startswith("uuid="):
-        UUID = line[5:]
+try:
+    config.read("config.txt")
+except:
+    config.read("../config.txt")
+
+name = config["user"]["name"]
+UUID = config["user"]["uuid"]
