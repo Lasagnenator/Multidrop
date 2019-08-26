@@ -192,3 +192,89 @@ class FileReceiveDialog ( wx.Dialog ):
         event.Skip()
 
 
+###########################################################################
+## Class ListenerFrame
+###########################################################################
+
+class ListenerFrame ( wx.Frame ):
+
+    def __init__( self, parent ):
+        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Incoming files", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.CAPTION|wx.CLOSE_BOX|wx.MINIMIZE_BOX|wx.SYSTEM_MENU|wx.TAB_TRAVERSAL )
+
+        self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+        bSizer8 = wx.BoxSizer( wx.VERTICAL )
+
+        self.m_scrolledWindow2 = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.VSCROLL )
+        self.m_scrolledWindow2.SetScrollRate( 5, 5 )
+        gSizer2 = wx.GridSizer( 0, 2, 0, 0 )
+
+        self.m_panel5 = IncomingPanel( self.m_scrolledWindow2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+        gSizer2.Add( self.m_panel5, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+        self.m_scrolledWindow2.SetSizer( gSizer2 )
+        self.m_scrolledWindow2.Layout()
+        gSizer2.Fit( self.m_scrolledWindow2 )
+        bSizer8.Add( self.m_scrolledWindow2, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+        self.SetSizer( bSizer8 )
+        self.Layout()
+
+        self.Centre( wx.BOTH )
+
+    def __del__( self ):
+        pass
+
+
+###########################################################################
+## Class IncomingPanel
+###########################################################################
+
+class IncomingPanel ( wx.Panel ):
+
+    def __init__( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( 250,-1 ), style = wx.TAB_TRAVERSAL, name = wx.EmptyString ):
+        wx.Panel.__init__ ( self, parent, id = id, pos = pos, size = size, style = style, name = name )
+
+        bSizer7 = wx.BoxSizer( wx.VERTICAL )
+
+        bSizer9 = wx.BoxSizer( wx.HORIZONTAL )
+
+        self.m_staticText8 = wx.StaticText( self, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, wx.ST_ELLIPSIZE_END )
+        self.m_staticText8.Wrap( -1 )
+
+        bSizer9.Add( self.m_staticText8, 0, wx.ALL, 5 )
+
+        self.m_staticText9 = wx.StaticText( self, wx.ID_ANY, u"Filename", wx.DefaultPosition, wx.DefaultSize, wx.ST_ELLIPSIZE_END )
+        self.m_staticText9.Wrap( -1 )
+
+        bSizer9.Add( self.m_staticText9, 0, wx.ALL, 5 )
+
+        self.m_staticText10 = wx.StaticText( self, wx.ID_ANY, u"Size", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText10.Wrap( -1 )
+
+        bSizer9.Add( self.m_staticText10, 0, wx.ALL, 5 )
+
+
+        bSizer7.Add( bSizer9, 1, wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+        bSizer10 = wx.BoxSizer( wx.HORIZONTAL )
+
+        self.m_button5 = wx.Button( self, wx.ID_ANY, u"Deny", wx.DefaultPosition, wx.DefaultSize, wx.BU_EXACTFIT )
+        bSizer10.Add( self.m_button5, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+
+        self.m_button7 = wx.Button( self, wx.ID_ANY, u"Accept", wx.DefaultPosition, wx.DefaultSize, wx.BU_EXACTFIT )
+        bSizer10.Add( self.m_button7, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+
+
+        bSizer7.Add( bSizer10, 0, wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+        self.SetSizer( bSizer7 )
+        self.Layout()
+
+    def __del__( self ):
+        pass
+
+

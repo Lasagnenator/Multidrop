@@ -26,12 +26,15 @@ def advertise(sock:BluetoothSocket)->[BluetoothSocket, "port"]:
                       service_id = config.UUID,
                       service_classes = [config.UUID, SERIAL_PORT_CLASS],
                       profiles = [SERIAL_PORT_PROFILE],
+                      provider = "Multidrop Systems"
                       )
     port = sock.getsockname()[1]
     return [sock,port]
 
-def send_data(sock:BluetoothSocket, data:b"string")->BluetoothSocket:
-    sock.sendall(data)
+def send_data(sock:BluetoothSocket, data:b"string", percentage = [0])->BluetoothSocket:
+    while sent<length:
+        sent += sock.send(data[sent:])
+        percentage[0] = sent/length
     return sock
 
 def recieve_data(sock:BluetoothSocket, size:int)->[b"data", BluetoothSocket]:
@@ -60,7 +63,7 @@ def accept_connection(sock, ret:list):
     t = Thread(target=_accept_connection, args=(sock, ret))
     t.start()
 
-def run_in_thread(func, ret:list, i=0, args=None):
+def run_in_thread(func, ret:list, i=0, *args):
     def temp(func,  ret, i, *args):
         ret[i] = func(*args)
     t = Thread(target=temp, args=(func, ret, i, *args))

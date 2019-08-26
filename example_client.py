@@ -27,7 +27,7 @@ length = os.stat(file_path).st_size
 client_sock.send(os.path.basename(file_path)+"\n"+str(length)+"\n")
 
 allow = client_sock.recv(1)
-if allow="0":
+if allow=="0":
     print("File denied")
     raise BaseException("Denied file")
 
@@ -36,9 +36,12 @@ sent = 0
 data = file.read()
 
 try:
-    while sent<length:
-        sent += client_sock.send(data[sent:])
-        #update[0] = sent/length #Percentage complete
+    percent = [0]
+    ret = [0]
+    run_in_thread(send_data, ret=ret, i=0, client_sock, data, percent)
+    while ret[0]==0:
+        time.sleep(1)
+        print("{}% complete".format(percent[0]*100))
     print("sent all data")
 except IOError:
     pass
