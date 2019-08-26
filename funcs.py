@@ -63,14 +63,7 @@ def accept_connection(sock, ret:list):
 def run_in_thread(func, ret:list, i=0, args=None):
     def temp(func,  ret, i, *args):
         ret[i] = func(*args)
-    if args==None:
-        def temp(func, ret, i):
-            ret[i] = func()
-        t = Thread(target=temp, args=(func, ret, i))
-        t.start()
-    else:
-        t = Thread(target=temp, args=(func, ret, i, *args))
-        t.start()
+    t = Thread(target=temp, args=(func, ret, i, *args))
 
 def quit(server_sock, client_sock, connected_sock):
     stop_advertising(server_sock)
