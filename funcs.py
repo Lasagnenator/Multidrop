@@ -4,7 +4,7 @@ import config
 from threading import Thread
 
 def scan():
-    return discover_devices(duration=2.56, lookup_names=True, flush_cache=True, lookup_class=False)
+    return discover_devices(duration=2, lookup_names=True, flush_cache=False, lookup_class=False)
 
 def scan2():
     return find_service(uuid=config.UUID)

@@ -36,17 +36,20 @@ class FileSendFrame ( wx.Frame ):
         self.m_filePicker1 = wx.FilePickerCtrl( self, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.DefaultSize, wx.FLP_OPEN|wx.FLP_SMALL )
         bSizer4.Add( self.m_filePicker1, 0, wx.ALL, 5 )
 
-        self.m_staticText5 = wx.StaticText( self, wx.ID_ANY, u"File:", wx.DefaultPosition, wx.Size( 200,-1 ), wx.ALIGN_CENTER_HORIZONTAL|wx.ST_ELLIPSIZE_MIDDLE )
-        self.m_staticText5.Wrap( -1 )
+        self.FileNameLabel = wx.StaticText( self, wx.ID_ANY, u"File:", wx.DefaultPosition, wx.Size( 200,-1 ), wx.ALIGN_CENTER_HORIZONTAL|wx.ST_ELLIPSIZE_MIDDLE )
+        self.FileNameLabel.Wrap( -1 )
 
-        bSizer4.Add( self.m_staticText5, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+        bSizer4.Add( self.FileNameLabel, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
         bSizer6.Add( bSizer4, 0, wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
-        self.m_scrolledWindow1 = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 420,160 ), wx.HSCROLL|wx.VSCROLL )
+        self.m_scrolledWindow1 = wx.ScrolledWindow( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( -1,160 ), wx.HSCROLL|wx.VSCROLL )
         self.m_scrolledWindow1.SetScrollRate( 5, 5 )
         self.bSizer5 = wx.BoxSizer( wx.VERTICAL )
+
+        self.m_panel2 = SendToPanel( self.m_scrolledWindow1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+        self.bSizer5.Add( self.m_panel2, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 
         self.m_scrolledWindow1.SetSizer( self.bSizer5 )
@@ -94,7 +97,7 @@ class SendToPanel ( wx.Panel ):
         self.ReceiverName = wx.StaticText( self, wx.ID_ANY, u"name", wx.DefaultPosition, wx.Size( 100,-1 ), wx.ALIGN_LEFT|wx.ST_ELLIPSIZE_END )
         self.ReceiverName.Wrap( -1 )
 
-        bSizer6.Add( self.ReceiverName, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+        bSizer6.Add( self.ReceiverName, 1, wx.ALIGN_CENTER_VERTICAL, 5 )
 
         self.ProgressGuage = wx.Gauge( self, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
         self.ProgressGuage.SetValue( 0 )
@@ -241,17 +244,17 @@ class IncomingPanel ( wx.Panel ):
 
         bSizer9 = wx.BoxSizer( wx.HORIZONTAL )
 
-        self.m_staticText8 = wx.StaticText( self, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, wx.ST_ELLIPSIZE_END )
+        self.m_staticText8 = wx.StaticText( self, wx.ID_ANY, u"Name", wx.DefaultPosition, wx.DefaultSize, wx.ST_ELLIPSIZE_END|wx.ST_NO_AUTORESIZE )
         self.m_staticText8.Wrap( -1 )
 
         bSizer9.Add( self.m_staticText8, 0, wx.ALL, 5 )
 
-        self.m_staticText9 = wx.StaticText( self, wx.ID_ANY, u"Filename", wx.DefaultPosition, wx.DefaultSize, wx.ST_ELLIPSIZE_END )
+        self.m_staticText9 = wx.StaticText( self, wx.ID_ANY, u"Filename", wx.DefaultPosition, wx.DefaultSize, wx.ST_ELLIPSIZE_MIDDLE|wx.ST_NO_AUTORESIZE )
         self.m_staticText9.Wrap( -1 )
 
         bSizer9.Add( self.m_staticText9, 0, wx.ALL, 5 )
 
-        self.m_staticText10 = wx.StaticText( self, wx.ID_ANY, u"Size", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText10 = wx.StaticText( self, wx.ID_ANY, u"Size", wx.DefaultPosition, wx.DefaultSize, wx.ST_NO_AUTORESIZE )
         self.m_staticText10.Wrap( -1 )
 
         bSizer9.Add( self.m_staticText10, 0, wx.ALL, 5 )

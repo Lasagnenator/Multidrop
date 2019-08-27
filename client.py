@@ -9,8 +9,8 @@ AvailablePeople = []
 scan_results = [0]
 
 def AppendPersonToSend(Frame, name):
-    AvailablePeople.append(Frames.SendToPanel( Frame.m_scrolledWindow1, wx.ID_ANY, wx.DefaultPosition, wx.Size( 400,80 ), wx.TAB_TRAVERSAL ))
-    Frame.bSizer5.Add( AvailablePeople[-1], 0, wx.ALIGN_CENTER_HORIZONTAL, 5 )
+    AvailablePeople.append(Frames.SendToPanel( Frame.m_scrolledWindow1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL ))
+    Frame.bSizer5.Add( AvailablePeople[-1], 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
     AvailablePeople[-1].ReceiverName.SetLabel(name)
     AvailablePeople[-1].SendButton.Bind(wx.EVT_BUTTON, SendClicked)
 
@@ -22,8 +22,12 @@ def ScanNearby(self):
     global scan_results
     scan_results = ["here"]
     #print("here")
-    scan_results = scan2()
+    scan_results = scan()
+    #scan_results = scan2()
     for result in scan_results:
+        name = result[1]
+        addr = result[0]
+        AppendPersonToSend(self, name)
         pass
 
 class FileSend(Frames.FileSendFrame):
@@ -33,9 +37,9 @@ class FileSend(Frames.FileSendFrame):
         #testing, this will be moved to 
         AppendPersonToSend(self, "person1")
         AppendPersonToSend(self, "person2")
-        self.ScanNearby(None)
     def FileChanged(self, event):
-        path = os.path.basename(self.m_filePicker1.Value)
+        fname = os.path.basename(self.m_filePicker1.Value)
+        self.FileNameLabel.SetValue(fname)
         pass
     def ScanNearby(self, event):
         #clear the available people
@@ -43,9 +47,9 @@ class FileSend(Frames.FileSendFrame):
         #run this in a thread to allow other things to run.
         #give it the 'self' argument to let it update the
         #window with the results so no callback is needed.
+        ScanNearby(self)
+        #print("here")
         run_in_thread(ScanNearby, [0], 0, self)
-        time.sleep(1)
-        print(scan_results)
 
 locale = wx.Locale.GetSystemLanguage()
 app = wx.App()
